@@ -1,36 +1,41 @@
 import unittest
 from order import Order
-from drink import Drink
+from drink import Drink, Size, Base, Flavor
 
 class TestOrder(unittest.TestCase):
 
     def test_add_and_count_items(self):
         o = Order()
-        d = Drink()
+        d = Drink(Size.MEDIUM)
         o.add_item(d)
         self.assertEqual(o.get_num_items(), 1)
 
     def test_remove_item(self):
         o = Order()
-        d1, d2 = Drink(), Drink()
+        d1, d2 = Drink(Size.SMALL), Drink(Size.LARGE)
         o.add_item(d1)
         o.add_item(d2)
         o.remove_item(0)
         self.assertEqual(o.get_num_items(), 1)
 
-    def test_total_price(self):
+    def test_order_total_with_tax(self):
         o = Order()
-        for _ in range(3):
-            o.add_item(Drink())
-        self.assertEqual(o.get_total(), 7.50)
+        d = Drink(Size.SMALL)
+        d.add_flavor(Flavor.LEMON)
+        o.add_item(d)
+        total = o.get_total()
+        expected_subtotal = d.get_total()
+        expected_total = round(expected_subtotal + expected_subtotal * 0.0725, 2)
+        self.assertAlmostEqual(total, expected_total, places=2)
 
-    def test_get_receipt_format(self):
-        d = Drink()
-        d.set_base("water")
-        d.add_flavor("lemon")
+    def test_receipt_format(self):
+        d = Drink(Size.LARGE)
+        d.set_base(Base.HILLFOG)
+        d.add_flavor(Flavor.LIME)
         o = Order()
         o.add_item(d)
         receipt = o.get_receipt()
-        self.assertIn("Base: water", receipt)
-        self.assertIn("Flavors: lemon", receipt)
-        self.assertIn("Total: $2.50", receipt)
+        self.assertIn("Large hill fog", receipt)
+        self.assertIn("Flavors: lime", receipt)
+        self.assertIn("Tax", receipt)
+        self.assertIn("Total", receipt)
