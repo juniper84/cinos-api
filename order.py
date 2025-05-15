@@ -6,9 +6,9 @@ class Order:
     def __init__(self):
         self._items = []
 
-    def add_item(self, drink):
-        """Add a Drink to the order."""
-        self._items.append(drink)
+    def add_item(self, item):
+        """Add a Drink or Food item to the order."""
+        self._items.append(item)
 
     def remove_item(self, index):
         """Remove a drink from the order by index."""
@@ -25,23 +25,32 @@ class Order:
 
     def get_total(self):
         """Return the total order cost including tax."""
-        subtotal = sum([drink.get_total() for drink in self._items])
+        subtotal = sum([item.get_total() for item in self._items])
         tax = subtotal * Order.TAX_RATE
         total = subtotal + tax
         return round(total, 2)
 
     def get_receipt(self):
-        """Generate a receipt showing each drink and the full price breakdown."""
+        """Generate a receipt showing each drink and food item with full price breakdown."""
         lines = []
         subtotal = 0
 
-        for i, drink in enumerate(self._items):
-            base = drink.get_base().value if drink.get_base() else "No base"
-            size = drink.get_size().value.capitalize()
-            flavors = ", ".join([f.value for f in drink.get_flavors()]) or "No flavors"
-            cost = drink.get_total()
-            subtotal += cost
-            lines.append(f"{i+1}. {size} {base} | Flavors: {flavors} | ${cost:.2f}")
+        for i, item in enumerate(self._items):
+            if hasattr(item, 'get_base'):  # it's a Drink
+                base = item.get_base().value if item.get_base() else "No base"
+                size = item.get_size().value.capitalize()
+                flavors = ", ".join([f.value for f in item.get_flavors()]) or "No flavors"
+                cost = item.get_total()
+                lines.append(f"{i+1}. {size} {base} | Flavors: {flavors} | ${cost:.2f}")
+            elif hasattr(item, 'get_type'):  # it's a Food
+                food_type = item.get_type().value
+                toppings = ", ".join([t.value for t in item.get_toppings()]) or "No toppings"
+                cost = item.get_total()
+                lines.append(f"{i+1}. {food_type} | Toppings: {toppings} | ${cost:.2f}")
+            else:
+                lines.append(f"{i+1}. Unknown item type.")
+
+            subtotal += item.get_total()
 
         tax = subtotal * Order.TAX_RATE
         total = subtotal + tax

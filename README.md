@@ -26,6 +26,16 @@ This is the backend logic for the Cinos drink ordering system, developed during 
 - **Improved test coverage**: Unit tests cover all getters and accessors, including new features added in Sprint 2.
 - **Docstrings and comments**: All classes and methods are now documented according to PEP 257.
 
+## Sprint 3 Features
+
+- **Food class**: A new `Food` class supports multiple food types like Hotdog, Corndog, and Ice Cream.
+- **Toppings**: Foods can have multiple toppings like Chili, Bacon Bits, or Whipped Cream.
+- **Pricing logic**: Each food type has a base cost, and some toppings add extra cost.
+- **Receipt update**: The order receipt now includes food items and their toppings alongside drinks.
+- **Tax calculation**: Tax is applied to the total of both food and drink items.
+- **Unit tests for food**: Full test coverage was added in `test_food.py` to verify food functionality.
+
+
 ## Run Tests
 
 Make sure you're in the project folder, then run:
@@ -33,6 +43,7 @@ Make sure you're in the project folder, then run:
 ```bash
 python3 -m unittest test_drink.py
 python3 -m unittest test_order.py
+python3 -m unittest test_food.py
 ```
 
 ## Developer Notes

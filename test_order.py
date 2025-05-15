@@ -1,6 +1,7 @@
 import unittest
 from order import Order
 from drink import Drink, Size, Base, Flavor
+from food import Food, FoodType, Topping
 
 class TestOrder(unittest.TestCase):
 
@@ -38,4 +39,22 @@ class TestOrder(unittest.TestCase):
         self.assertIn("Large hill fog", receipt)
         self.assertIn("Flavors: lime", receipt)
         self.assertIn("Tax", receipt)
+        self.assertIn("Total", receipt)
+
+    def test_add_food_item(self):
+        o = Order()
+        f = Food(FoodType.HOTDOG)
+        f.add_topping(Topping.CHILI)
+        o.add_item(f)
+        self.assertEqual(o.get_num_items(), 1)
+        self.assertAlmostEqual(o.get_total(), round(f.get_total() + f.get_total() * 0.0725, 2))
+
+    def test_receipt_includes_food(self):
+        o = Order()
+        f = Food(FoodType.NACHO_CHIPS)
+        f.add_topping(Topping.NACHO_CHEESE)
+        o.add_item(f)
+        receipt = o.get_receipt()
+        self.assertIn("Nacho Chips", receipt)
+        self.assertIn("Toppings: Nacho Cheese", receipt)
         self.assertIn("Total", receipt)
