@@ -34,10 +34,10 @@ This is the backend logic for the Cinos drink ordering system, developed during 
 Make sure you're in the project folder, then run:
 
 ```bash
-python3 -m unittest test_drink.py
-python3 -m unittest test_order.py
-python3 -m unittest test_food.py
-python3 -m unittest test_ice_storm.py
+python3 -m unittest tests/test_drink.py
+python3 -m unittest tests/test_food.py
+python3 -m unittest tests/test_order.py
+python3 -m unittest tests/test_ice_storm.py
 ```
 
 ## Developer Notes

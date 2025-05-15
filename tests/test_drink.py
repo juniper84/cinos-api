@@ -1,5 +1,5 @@
 import unittest
-from drink import Drink, Size, Base, Flavor
+from api.drink import Drink, Size, Base, Flavor
 
 class TestDrink(unittest.TestCase):
 

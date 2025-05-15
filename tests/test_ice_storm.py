@@ -2,7 +2,7 @@
 
 
 import unittest
-from ice_storm import IceStorm, IceCreamFlavor, MixIn
+from api.ice_storm import IceStorm, IceCreamFlavor, MixIn
 
 class TestIceStorm(unittest.TestCase):
 

@@ -1,7 +1,7 @@
 import unittest
-from order import Order
-from drink import Drink, Size, Base, Flavor
-from food import Food, FoodType, Topping
+from api.order import Order
+from api.drink import Drink, Size, Base, Flavor
+from api.food import Food, FoodType, Topping
 
 class TestOrder(unittest.TestCase):
 

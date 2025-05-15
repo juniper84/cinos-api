@@ -1,7 +1,7 @@
 
 
 import unittest
-from food import Food, FoodType, Topping
+from api.food import Food, FoodType, Topping
 
 class TestFood(unittest.TestCase):
 
