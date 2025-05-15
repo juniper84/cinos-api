@@ -1,20 +1,5 @@
 # Cinos API Backend
 
-This is the backend logic for the Cinos drink ordering system.
-
-## Features
-
-- Drink class with support for bases and non-duplicate flavors.
-- Order class to hold drink items, track totals, and generate receipts.
-
-## Run Tests
-
-
-```bash
-python3 -m unittest test_drink.py
-python3 -m unittest test_order.py
-# Cinos API Backend
-
 This is the backend logic for the Cinos drink ordering system, developed during Sprint 1 and Sprint 2 of my Test-Driven Development class.
 
 ## Sprint 2 Features
@@ -35,6 +20,14 @@ This is the backend logic for the Cinos drink ordering system, developed during 
 - **Tax calculation**: Tax is applied to the total of both food and drink items.
 - **Unit tests for food**: Full test coverage was added in `test_food.py` to verify food functionality.
 
+## Sprint 4 Features
+
+- **Ice Storm class**: Introduced a new `IceStorm` class representing frozen dessert items with customizable base flavors and mix-ins.
+- **Base flavor support**: Allows selection of base flavors like Mint Chocolate Chip, Chocolate, and Butter Pecan, each with their own pricing.
+- **Mix-in/topping support**: Ice Storms support additional toppings like Storios, Cookie Dough, and Caramel Sauce, each affecting the price.
+- **Pricing logic**: Combines base flavor price and mix-in costs into a final total.
+- **Receipt update**: The receipt now includes Ice Storms with their selected flavors and mix-ins listed.
+- **Unit tests for Ice Storm**: All functionality tested in `test_ice_storm.py` as part of TDD workflow.
 
 ## Run Tests
 
@@ -44,6 +37,7 @@ Make sure you're in the project folder, then run:
 python3 -m unittest test_drink.py
 python3 -m unittest test_order.py
 python3 -m unittest test_food.py
+python3 -m unittest test_ice_storm.py
 ```
 
 ## Developer Notes

@@ -47,6 +47,11 @@ class Order:
                 toppings = ", ".join([t.value for t in item.get_toppings()]) or "No toppings"
                 cost = item.get_total()
                 lines.append(f"{i+1}. {food_type} | Toppings: {toppings} | ${cost:.2f}")
+            elif hasattr(item, 'get_flavors') and hasattr(item, 'get_base') and not hasattr(item, 'get_size') and not hasattr(item, 'get_type'):
+                base = item.get_base().value
+                mixins = ", ".join([m.value for m in item.get_flavors()]) or "No mix-ins"
+                cost = item.get_total()
+                lines.append(f"{i+1}. Ice Storm | Base: {base} | Mix-ins: {mixins} | ${cost:.2f}")
             else:
                 lines.append(f"{i+1}. Unknown item type.")
 
